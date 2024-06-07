@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
@@ -42,7 +44,7 @@ fun MyApp(modifier: Modifier = Modifier) {
         if (!test) {
             TestScreen(onContinueClicked = { test = false })
         } else {
-            Greetings(modifier)
+            RecyclerViewTest(modifier)
         }
     }
 }
@@ -102,6 +104,18 @@ fun TestScreen(
             modifier = modifier.padding(horizontal = 8.dp, vertical = 4.dp)
         ) {
             Text("공부 시작 버튼")
+        }
+    }
+}
+
+@Composable
+private fun RecyclerViewTest(
+    modifier: Modifier = Modifier,
+    names : List<String> = List(1000) {"$it"}
+){
+    LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
+        items(items = names){name ->
+            Greeting(name)
         }
     }
 }
