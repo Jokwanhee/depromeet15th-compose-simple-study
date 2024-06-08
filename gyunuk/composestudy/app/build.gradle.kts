@@ -50,6 +50,10 @@ android {
 }
 
 dependencies {
+    val nav_version = "2.7.7"
+    val orbit_version = "8.0.0"
+    val kakao_version = "2.20.1"
+    val glide_version = "1.3.7"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
@@ -66,4 +70,22 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //compose 버튼 아이콘 대체
+    implementation("androidx.compose.material:material-icons-extended")
+
+    //jetpack navigation
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    //orbit
+    implementation("org.orbit-mvi:orbit-core:$orbit_version")
+    implementation("org.orbit-mvi:orbit-viewmodel:$orbit_version")
+    implementation("org.orbit-mvi:orbit-compose:$orbit_version")
+    testImplementation("org.orbit-mvi:orbit-test:$orbit_version")
+
+    //kakao
+    implementation("com.kakao.sdk:v2-all:$kakao_version")
+
+    //glide
+    implementation ("com.github.skydoves:landscapist-glide:$glide_version")
 }
