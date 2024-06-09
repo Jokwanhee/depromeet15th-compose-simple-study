@@ -66,4 +66,10 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // orbit library
+    implementation("org.orbit-mvi:orbit-core:4.3.2")
+    implementation("org.orbit-mvi:orbit-viewmodel:4.3.2")
+    implementation("org.orbit-mvi:orbit-compose:4.3.2")
+    testImplementation("org.orbit-mvi:orbit-test:4.3.2")
 }
