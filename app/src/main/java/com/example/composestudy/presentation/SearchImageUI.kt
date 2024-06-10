@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.composestudy.R
-import com.example.composestudy.domain.Document
+import com.example.composestudy.domain.entity.Document
 
 @Composable
 fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {

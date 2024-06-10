@@ -1,7 +1,8 @@
-package com.example.composestudy.data
+package com.example.composestudy.data.repository
 
-import com.example.composestudy.domain.Document
-import com.example.composestudy.domain.KakaoRepository
+import com.example.composestudy.data.source.KakaoDataSource
+import com.example.composestudy.domain.entity.Document
+import com.example.composestudy.domain.repository.KakaoRepository
 
 class KakaoRepositoryImpl(private val apiService: KakaoDataSource) : KakaoRepository {
     override suspend fun searchImages(authorization: String, query: String): List<Document> {

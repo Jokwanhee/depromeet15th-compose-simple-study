@@ -2,8 +2,8 @@ package com.example.composestudy.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.composestudy.domain.Document
-import com.example.composestudy.domain.KakaoRepository
+import com.example.composestudy.domain.entity.Document
+import com.example.composestudy.domain.repository.KakaoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

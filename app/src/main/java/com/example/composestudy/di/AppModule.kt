@@ -1,9 +1,9 @@
 package com.example.composestudy.di
 
-import com.example.composestudy.data.KakaoApiService
-import com.example.composestudy.data.KakaoDataSource
-import com.example.composestudy.data.KakaoRepositoryImpl
-import com.example.composestudy.domain.KakaoRepository
+import com.example.composestudy.data.repository.KakaoRepositoryImpl
+import com.example.composestudy.data.service.KakaoApiService
+import com.example.composestudy.data.source.KakaoDataSource
+import com.example.composestudy.domain.repository.KakaoRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

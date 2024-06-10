@@ -1,4 +1,4 @@
-package com.example.composestudy.domain
+package com.example.composestudy.domain.entity
 
 data class Document(
     val collection: String,

@@ -1,5 +1,5 @@
-package com.example.composestudy.data
-import com.example.composestudy.domain.Document
+package com.example.composestudy.data.model
+import com.example.composestudy.domain.entity.Document
 
 data class KakaoSearchResponse(
     val meta: Meta,
