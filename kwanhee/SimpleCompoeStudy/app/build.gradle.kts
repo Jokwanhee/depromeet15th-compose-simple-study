@@ -23,6 +23,8 @@ android {
             useSupportLibrary = true
         }
         buildConfigField("String", "kakao_native_app_key", getApiKey("kakao_native_app_key"))
+        buildConfigField("String", "base_url", getApiKey("base_url"))
+        buildConfigField("String", "rest_api_key", getApiKey("rest_api_key"))
     }
 
     buildTypes {
