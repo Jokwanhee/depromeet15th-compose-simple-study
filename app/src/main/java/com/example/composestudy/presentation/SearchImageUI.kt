@@ -37,18 +37,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
-import com.example.composestudy.Document
 import com.example.composestudy.R
+import com.example.composestudy.domain.Document
 
 @Composable
 fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {
     var searchText by remember { mutableStateOf(TextFieldValue()) }
-    val state by viewModel.container.stateFlow.collectAsState()
+    val searchState by viewModel.searchState.collectAsState()
 
     Surface(color = Color.White) {
         Column(
@@ -65,17 +64,17 @@ fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {
                 { searchText = TextFieldValue() },
             )
 
-            when (state) {
+            when (searchState) {
                 is SearchState.Loading -> {
                     CircularProgressIndicator()
                 }
 
                 is SearchState.Success -> {
-                    SearchResults((state as SearchState.Success).results)
+                    SearchResults((searchState as SearchState.Success).results)
                 }
 
                 is SearchState.Error -> {
-                    val errorMessage = (state as SearchState.Error).message
+                    val errorMessage = (searchState as SearchState.Error).message
                     Text(text = "Error: $errorMessage")
                 }
             }
@@ -148,7 +147,7 @@ fun SearchResultItem(document: Document) {
             modifier = Modifier.fillMaxHeight(),
         ) {
             Image(
-                painter = rememberAsyncImagePainter(document.image_url),
+                painter = rememberAsyncImagePainter(document.thumbnail_url),
                 contentDescription = "thumbnail",
                 modifier = Modifier
                     .size(60.dp)
@@ -189,10 +188,4 @@ fun SearchResultItem(document: Document) {
                 .padding(end = 8.dp, top = 8.dp),
         )
     }
-}
-
-@Preview
-@Composable
-fun PreviewSearchUI() {
-    SearchImageUI()
 }
