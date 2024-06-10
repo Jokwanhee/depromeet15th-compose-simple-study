@@ -95,4 +95,13 @@ dependencies {
 
     // Coil Compose
     implementation("io.coil-kt:coil-compose:2.1.0")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.46.1")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.40.5")
+
 }
