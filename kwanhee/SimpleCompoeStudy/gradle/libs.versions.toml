@@ -16,6 +16,8 @@ hilt = "2.44"
 retrofit = "2.9.0"
 okhttp = "4.10.0"
 
+kakao = "2.20.1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -46,6 +48,9 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 # okhttp
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+
+# kakao
+kakao-all = { group = "com.kakao.sdk", name = "v2-all", version.ref = "kakao" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
