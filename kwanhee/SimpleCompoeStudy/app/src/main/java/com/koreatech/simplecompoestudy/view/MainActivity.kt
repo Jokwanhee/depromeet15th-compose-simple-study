@@ -1,4 +1,4 @@
-package com.koreatech.simplecompoestudy
+package com.koreatech.simplecompoestudy.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
