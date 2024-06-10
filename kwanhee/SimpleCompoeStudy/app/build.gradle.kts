@@ -83,6 +83,9 @@ dependencies {
     // kakao
     implementation(libs.kakao.all)
 
+    // paging
+    implementation(libs.paging)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
