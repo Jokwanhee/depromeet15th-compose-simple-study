@@ -1,6 +1,8 @@
-package com.example.composestudy
+package com.example.composestudy.presentation
 
 import androidx.lifecycle.ViewModel
+import com.example.composestudy.Document
+import com.example.composestudy.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.orbitmvi.orbit.ContainerHost
