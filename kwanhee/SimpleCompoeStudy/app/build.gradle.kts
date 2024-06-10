@@ -68,6 +68,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    // use to hiltViewModel()
+    implementation(libs.hilt.navigation.compose)
+
     // orbit
     implementation(libs.bundles.orbit)
 

@@ -4,4 +4,5 @@ import com.koreatech.simplecompoestudy.data.response.SearchImageDocumentsRespons
 
 data class MainState(
     val images: List<SearchImageDocumentsResponse> = emptyList(),
+    val searchText: String = ""
 )
