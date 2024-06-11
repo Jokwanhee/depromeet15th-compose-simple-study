@@ -1,5 +1,6 @@
 package com.koreatech.simplecompoestudy.repository
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -38,7 +39,7 @@ class SearchPagingSource(
         }
         return LoadResult.Page(
             data = data.documents,
-            prevKey = if (page == 0) null else page - 1,
+            prevKey = if (page == 1) null else page - 1,
             nextKey = if (data.documents.isEmpty()) null else page + 1
         )
     }

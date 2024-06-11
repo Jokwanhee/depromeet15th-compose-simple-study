@@ -7,8 +7,8 @@ class SearchDataSourceImpl() {
     suspend fun getSearchImage(
         query: String,
         sort: String = "accuracy",
-        page: Int = 1,
-        size: Int = 80,
+        page: Int,
+        size: Int,
     ): SearchImageResponse {
         return ApiManager.kakaoService.getSearchImage(
             query = query,

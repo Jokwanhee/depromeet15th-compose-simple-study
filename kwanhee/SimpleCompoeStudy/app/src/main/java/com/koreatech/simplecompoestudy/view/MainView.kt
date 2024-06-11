@@ -2,7 +2,6 @@ package com.koreatech.simplecompoestudy.view
 
 import android.content.Context
 import android.util.Log
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -36,11 +35,8 @@ fun MainView(
             onClear = viewModel::clearSearchText
         )
 
-        if (images.itemSnapshotList.isEmpty() && !images.loadState.hasError) {
-            Text(text = "검색결과가 없습니다.")
-        }
         if (images.loadState.hasError) {
-            Text(text = "다시 시도해주세요.")
+            Text(text = "에러 발생!")
         }
 
         LazyColumn(
