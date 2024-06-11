@@ -18,8 +18,8 @@ data class NIASearchPhotosResponse(
                         collection = document.collection.ifEmpty { "None" },
                         thumbnailUrl = document.thumbnailUrl,
                         imageUrl = document.imageUrl,
-                        displaySitename = document.displaySitename.ifEmpty { "사이트 주소를 알 수 없습니다." },
-                        docUrl = document.docUrl,
+                        displaySitename = document.displaySitename.ifEmpty { "사이트 명 모름" },
+                        docUrl = document.docUrl.ifEmpty { "사이트 출처 주소를 알 수 없음" },
                         datetime = if (document.datetime.isEmpty()) "날짜 알 수 없음" else document.datetime
                     )
                 }
