@@ -56,12 +56,12 @@ fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             SearchBar(
-                searchText,
-                { query ->
+                searchText = searchText,
+                onSearchTextChanged = { query ->
                     searchText = query
                     viewModel.processAction(SearchAction.Search(query.text))
                 },
-                { searchText = TextFieldValue() },
+                onClearSearch = { searchText = TextFieldValue() },
             )
 
             when (val searchState = state.searchState) {
@@ -85,11 +85,12 @@ fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {
 @Composable
 fun SearchBar(
     searchText: TextFieldValue,
+    modifier: Modifier = Modifier,
     onSearchTextChanged: (TextFieldValue) -> Unit,
     onClearSearch: () -> Unit,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 16.dp)
             .height(50.dp)
