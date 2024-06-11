@@ -133,6 +133,7 @@ fun ArticleImage(
                     )
                     Text(
                         text = image.displaySitename,
+                        fontSize = 16.sp,
                         modifier = Modifier.padding(horizontal = 8.dp),
                         fontWeight = FontWeight.SemiBold
                     )
@@ -140,13 +141,13 @@ fun ArticleImage(
 
                 Text(
                     text = image.docUrl,
-                    fontSize = 12.sp,
+                    fontSize = 10.sp,
                     color = Color.Gray,
                 )
 
                 Text(
                     text = DateTimeUtils.formatDateTime(image.datetime),
-                    fontSize = 12.sp,
+                    fontSize = 10.sp,
                     color = Color.Gray
                 )
             }
