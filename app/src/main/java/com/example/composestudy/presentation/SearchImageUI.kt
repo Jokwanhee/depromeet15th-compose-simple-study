@@ -82,7 +82,6 @@ fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {
     }
 }
 
-
 @Composable
 fun SearchBar(
     searchText: TextFieldValue,
