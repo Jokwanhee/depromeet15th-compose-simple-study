@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,10 +31,10 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.koreatech.simplecompoestudy.R
 import com.koreatech.simplecompoestudy.data.response.SearchImageDocumentsResponse
 import com.koreatech.simplecompoestudy.utils.HorizontalSpacer
 import com.koreatech.simplecompoestudy.utils.VerticalSpacer
+import com.koreatech.simplecompoestudy.utils.formatterISO8601
 
 @Composable
 fun ImageItem(
@@ -100,7 +99,9 @@ fun ImageItem(
             )
             VerticalSpacer(height = 2.dp)
             Text(
-                text = imageDocument?.datetime ?: "",
+                text = imageDocument?.datetime?.let {
+                    formatterISO8601(it)
+                } ?: "",
                 color = Color.Gray,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
