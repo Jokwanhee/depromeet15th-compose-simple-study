@@ -64,23 +64,24 @@ fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {
                 onClearSearch = { searchText = TextFieldValue() },
             )
 
-            when (val searchState = state.searchState) {
+            when (state.searchState) {
                 is SearchState.Loading -> {
                     CircularProgressIndicator()
                 }
 
                 is SearchState.Success -> {
-                    SearchResults(searchState.results)
+                    SearchResults((state.searchState as SearchState.Success).results)
                 }
 
                 is SearchState.Error -> {
-                    val errorMessage = searchState.message
+                    val errorMessage = (state.searchState as SearchState.Error).message
                     Text(text = "Error: $errorMessage")
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun SearchBar(
