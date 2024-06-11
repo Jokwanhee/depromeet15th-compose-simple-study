@@ -44,24 +44,31 @@ class HomeViewModel @Inject constructor(
      */
     override val container = container<HomeState, HomeSideEffect>(HomeState())
 
-    fun searchPhotoList(query: String) = intent {
+    fun searchPhotoList() = intent {
         viewModelScope.launch {
-            reduce { state.copy(loading = true) }
-            try {
-                repository.getSearchPhotos(query).collect { response ->
-                    if (response is BaseState.Success) {
+            reduce { state.copy(loading = true, error = null) }
+            repository.getSearchPhotos(container.stateFlow.value.searchText).collect { response ->
+                when (response) {
+                    is BaseState.Success -> {
                         val photos = response.data.documents
                         reduce { state.copy(photos = photos, loading = false) }
                         postSideEffect(HomeSideEffect.Toast("이미지 불러오기가 완료"))
-                    } else if (response is BaseState.Error) {
-                        reduce { state.copy(loading = false) }
+                    }
+
+                    is BaseState.Error -> {
+                        reduce { state.copy(loading = false, error = response.message) }
                         postSideEffect(HomeSideEffect.Toast(response.message))
                     }
                 }
-            } catch (e: Exception) {
-                reduce { state.copy(loading = false) }
-                postSideEffect(HomeSideEffect.Toast("이미지 불러오기 중 오류가 발생"))
             }
         }
+    }
+
+    fun updateSearchText(text: String) = intent {
+        reduce { state.copy(searchText = text) }
+    }
+
+    fun clearSearchText() = intent {
+        reduce { state.copy(searchText = "") }
     }
 }

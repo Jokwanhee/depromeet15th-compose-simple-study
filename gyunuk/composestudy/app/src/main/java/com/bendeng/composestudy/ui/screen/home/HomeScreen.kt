@@ -22,8 +22,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,9 +34,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,6 +48,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bendeng.composestudy.R
 import com.bendeng.composestudy.domain.model.DocumentData
+import com.bendeng.composestudy.ui.components.LoadingDialog
 import com.bendeng.composestudy.ui.components.RoundedGlideImage
 import com.bendeng.composestudy.ui.util.DateTimeUtils
 
@@ -64,10 +60,14 @@ fun HomeScreen(
     val state by viewModel.container.stateFlow.collectAsState()
     val context = LocalContext.current
 
-    LaunchedEffect(viewModel){
+    LaunchedEffect(viewModel) {
         viewModel.container.sideEffectFlow.collect { sideEffect ->
-            when(sideEffect){
-                is HomeSideEffect.Toast -> Toast.makeText(context,sideEffect.text,Toast.LENGTH_SHORT).show()
+            when (sideEffect) {
+                is HomeSideEffect.Toast -> Toast.makeText(
+                    context,
+                    sideEffect.text,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -76,12 +76,14 @@ fun HomeScreen(
         modifier = modifier.padding(start = 20.dp, end = 20.dp, top = 20.dp)
     ) {
         Column(modifier = modifier) {
-            HomeSearchBar(onSearch = { query ->
-                viewModel.searchPhotoList(query)
-            })
+            HomeSearchBar(
+                text = state.searchText,
+                onSearch = viewModel::searchPhotoList,
+                onUpdateSearchText = viewModel::updateSearchText,
+                onClearSearchText = viewModel::clearSearchText
+            )
             ArticleList(images = state.photos)
         }
-
         LoadingDialog(show = state.loading)
     }
 }
@@ -163,17 +165,20 @@ fun ArticleImage(
 @Composable
 fun HomeSearchBar(
     modifier: Modifier = Modifier,
-    onSearch: (String) -> Unit,
+    text: String,
+    onSearch: () -> Unit,
+    onUpdateSearchText: (String) -> Unit,
+    onClearSearchText: () -> Unit,
 ) {
-    var text by rememberSaveable { mutableStateOf("") }
+
     val focusManager = LocalFocusManager.current
 
     TextField(
         value = text,
-        onValueChange = { text = it },
+        onValueChange = { onUpdateSearchText(it) },
         keyboardActions = KeyboardActions(onDone = {
             focusManager.clearFocus()
-            onSearch(text)
+            onSearch()
         }),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
@@ -182,7 +187,7 @@ fun HomeSearchBar(
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
         trailingIcon = {
             if (text.isNotEmpty()) {
-                IconButton(onClick = { text = "" }) {
+                IconButton(onClick = { onClearSearchText() }) {
                     Icon(Icons.Default.Close, contentDescription = null)
                 }
             }
@@ -197,28 +202,4 @@ fun HomeSearchBar(
         },
         modifier = modifier.fillMaxWidth().heightIn(60.dp)
     )
-}
-
-
-@Composable
-fun LoadingDialog(
-    show: Boolean
-) {
-    if (show) {
-        AlertDialog(
-            onDismissRequest = {},
-            confirmButton = {},
-            title = null,
-            text = {
-                Row(
-                    modifier = Modifier.padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Text(text = "Loading...")
-                }
-            }
-        )
-    }
 }
