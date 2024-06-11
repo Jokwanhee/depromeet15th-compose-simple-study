@@ -1,6 +1,7 @@
 package com.koreatech.simplecompoestudy.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -23,23 +24,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             SimpleCompoeStudyTheme {
                 Scaffold { paddingValues ->
-                    Column(
-                        modifier = Modifier.padding(paddingValues)
-                    ) {
-                        val viewModel: MainViewModel = hiltViewModel()
-                        val state by viewModel.collectAsState()
-
-                        viewModel.collectSideEffect {
-                            when (it) {
-                                is MainSideEffect.Toast -> {
-                                    it.message
-                                }
-                            }
-                        }
-
-                        viewModel.loadSearchImages("1")
-
-                    }
+                    val viewModel: MainViewModel = hiltViewModel()
+                    MainView(
+                        modifier = Modifier.padding(paddingValues),
+                        viewModel = viewModel
+                    )
                 }
             }
         }
