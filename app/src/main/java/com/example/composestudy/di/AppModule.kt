@@ -10,11 +10,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
     @Provides
+    @Singleton
     fun provideKakaoApiService(): KakaoApiService {
         return Retrofit.Builder()
             .baseUrl("https://dapi.kakao.com")
@@ -24,11 +27,13 @@ object AppModule {
     }
 
     @Provides
+    @Singleton
     fun provideKakaoDataSource(apiService: KakaoApiService): KakaoDataSource {
         return KakaoDataSource(apiService)
     }
 
     @Provides
+    @Singleton
     fun provideKakaoRepository(dataSource: KakaoDataSource): KakaoRepository {
         return KakaoRepositoryImpl(dataSource)
     }
