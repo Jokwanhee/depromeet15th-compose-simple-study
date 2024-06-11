@@ -15,14 +15,12 @@ data class NIASearchPhotosResponse(
             NIASearchPhotosData(
                 documents = documents.map { document ->
                     DocumentData(
-                        collection = document.collection,
+                        collection = document.collection.ifEmpty { "None" },
                         thumbnailUrl = document.thumbnailUrl,
                         imageUrl = document.imageUrl,
-                        width = document.width,
-                        height = document.height,
-                        displaySitename = document.displaySitename,
-                        docUrl = document.docUrl,
-                        datetime = document.datetime
+                        displaySitename = document.displaySitename.ifEmpty { "사이트 명 모름" },
+                        docUrl = document.docUrl.ifEmpty { "사이트 주소 알 수 없음" },
+                        datetime = if (document.datetime.isEmpty()) "날짜 알 수 없음" else document.datetime
                     )
                 }
             )
