@@ -46,20 +46,3 @@ data class Document(
     @SerializedName("thumbnail_url") val thumbnailUrl: String,
     @SerializedName("width") val width: Int,
 )
-
-
-/*
-
-            documents = documents.forEach {
-                DocumentData(
-                    collection = it.collection,
-                    thumbnailUrl = it.thumbnail_url,
-                    imageUrl =  it.image_url,
-                    width = it.width,
-                    height = it.height,
-                    displaySitename = it.display_sitename,
-                    docUrl = it.doc_url,
-                    datetime = it.datetime
-                )
-            }
- */
