@@ -24,7 +24,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,11 +42,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.composestudy.R
 import com.example.composestudy.domain.entity.Document
+import org.orbitmvi.orbit.compose.collectAsState
 
 @Composable
 fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {
     var searchText by remember { mutableStateOf(TextFieldValue()) }
-    val searchState by viewModel.searchState.collectAsState()
+    val state by viewModel.collectAsState()
 
     Surface(color = Color.White) {
         Column(
@@ -59,22 +59,22 @@ fun SearchImageUI(viewModel: SearchViewModel = viewModel()) {
                 searchText,
                 { query ->
                     searchText = query
-                    viewModel.initSearch(query.text)
+                    viewModel.processAction(SearchAction.Search(query.text))
                 },
                 { searchText = TextFieldValue() },
             )
 
-            when (searchState) {
+            when (val searchState = state.searchState) {
                 is SearchState.Loading -> {
                     CircularProgressIndicator()
                 }
 
                 is SearchState.Success -> {
-                    SearchResults((searchState as SearchState.Success).results)
+                    SearchResults(searchState.results)
                 }
 
                 is SearchState.Error -> {
-                    val errorMessage = (searchState as SearchState.Error).message
+                    val errorMessage = searchState.message
                     Text(text = "Error: $errorMessage")
                 }
             }
