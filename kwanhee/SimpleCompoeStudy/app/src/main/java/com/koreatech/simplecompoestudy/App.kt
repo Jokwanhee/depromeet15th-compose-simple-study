@@ -1,8 +1,7 @@
-package com.koreatech
+package com.koreatech.simplecompoestudy
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
-import com.koreatech.simplecompoestudy.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

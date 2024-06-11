@@ -3,7 +3,7 @@ package com.koreatech.simplecompoestudy.data.datasource
 import com.koreatech.simplecompoestudy.api.ApiManager
 import com.koreatech.simplecompoestudy.data.response.SearchImageResponse
 
-class SearchDataSourceImpl () {
+class SearchDataSourceImpl() {
     suspend fun getSearchImage(
         query: String,
         sort: String = "accuracy",
